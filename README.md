@@ -3,6 +3,7 @@
 A custom-engineered quadruped robotics platform featuring a dual-core Real-Time Operating System (RTOS), 2.4GHz custom telemetry, and an IMU-driven PID active suspension system. 
 
 ![Tank Spin Transformation](media/tank-spin_to_normal.gif)
+
 *Demonstration of the on-the-fly kinematic transformation from Arcade Drive to zero-radius Tank Spin.*
 
 ---
