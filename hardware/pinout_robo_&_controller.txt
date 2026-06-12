@@ -1,0 +1,94 @@
+=============================================================================
+             QUADRUPED ROBOT & CONTROLLER - HARDWARE WIRING SCHEMATIC
+=============================================================================
+
+-----------------------------------------------------------------------------
+[PART 1] THE ROBOT (Raspberry Pi Pico 2/ Pico 2W - Dual Core)
+-----------------------------------------------------------------------------
+
+POWER DISTRIBUTION:
+    VSYS             ➔ Buck Converter OUT (+)
+    Physical Pin 38  ➔ Buck Converter OUT (-) / Common Ground
+    3V3 (OUT)        ➔ VCC for: PCA9685, Touch 1, Touch 2, OLED, DHT22, HC-SR04P
+    GND              ➔ Common Ground for: PCA9685, Touch 1, Touch 2, OLED, DHT22, HC-SR04P, L298N
+
+I2C BUS 0 (SDA / SCL):
+    Pin 6  (GP4)     ➔ I2C SDA (OLED Display & PCA9685 Servo Driver)
+    Pin 7  (GP5)     ➔ I2C SCL (OLED Display & PCA9685 Servo Driver)
+    
+    I2C Addresses:
+        OLED Display : 0x3C
+        PCA9685      : 0x40
+        MPU6050 (IMU): 0x68
+        Daisy Chain  : 0x70 (PCA9685 + MPU6050 Combined)
+
+SENSORS & UI INTERFACES:
+    Pin 31 (GP26/ADC)➔ Voltage Divider Wire (Battery Level Monitor)
+    Pin 26 (GP20)    ➔ DHT22 Temperature & Humidity Sensor (Data)
+    Pin 21 (GP16)    ➔ HC-SR04P Ultrasonic Sensor (TRIG)
+    Pin 22 (GP17)    ➔ HC-SR04P Ultrasonic Sensor (ECHO)
+    Pin 24 (GP18)    ➔ Touch Sensor 1 (UI Navigation)
+    Pin 25 (GP19)    ➔ Touch Sensor 2 (Mode Selection / Deadman Switch)
+    Pin 9  (GP6)     ➔ Active Buzzer (Audio Feedback)
+
+L298N DC MOTOR DRIVER (Locomotion):
+    Pin 19 (GP14)    ➔ ENA (Enable A / Left Motor PWM Speed)
+    Pin 20 (GP15)    ➔ ENB (Enable B / Right Motor PWM Speed)
+    Pin 14 (GP10)    ➔ IN1 (Left Motor Forward)
+    Pin 15 (GP11)    ➔ IN2 (Left Motor Reverse)
+    Pin 16 (GP12)    ➔ IN3 (Right Motor Forward)
+    Pin 17 (GP13)    ➔ IN4 (Right Motor Reverse)
+
+NRF24L01+ RADIO TRANSCEIVER (SPI):
+    Pin 11 (GP8)     ➔ CE  (Chip Enable)
+    Pin 2  (GP1)     ➔ CSN (Chip Select Not)
+    Pin 4  (GP2)     ➔ SCK (SPI Clock)
+    Pin 5  (GP3)     ➔ MOSI (Master Out Slave In)
+    Pin 1  (GP0)     ➔ MISO (Master In Slave Out)
+
+PCA9685 SERVO DRIVER (Active Suspension & Steering Mapping):
+    Channel 3        ➔ Front-Left Hip (Yaw/Steering)
+    Channel 12       ➔ Front-Left Knee (Pitch/Bend)
+    Channel 2        ➔ Front-Right Hip (Yaw/Steering)
+    Channel 15       ➔ Front-Right Knee (Pitch/Bend)
+    Channel 1        ➔ Back-Left Hip (Yaw/Steering)
+    Channel 9        ➔ Back-Left Knee (Pitch/Bend)
+    Channel 0        ➔ Back-Right Hip (Yaw/Steering)
+    Channel 8        ➔ Back-Right Knee (Pitch/Bend)
+
+
+-----------------------------------------------------------------------------
+[PART 2] THE CONTROLLER (Raspberry Pi Pico / Test Rig)
+-----------------------------------------------------------------------------
+
+POWER DISTRIBUTION:
+    VSYS 	     ➔ Battery (+)
+    Pin 36 (3V3 OUT) ➔ VCC for NRF24L01+, TFT Display, Joystick
+    Pin 38 (GND)     ➔ Common Ground for NRF24L01+, TFT Display, Joystick, Battery (-)
+
+NRF24L01+ RADIO TRANSCEIVER (SPI):
+    Pin 26 (GP20)    ➔ CE  (Chip Enable)
+    Pin 22 (GP17)    ➔ CSN (Chip Select Not)
+    Pin 24 (GP18)    ➔ SCK (SPI Clock)
+    Pin 25 (GP19)    ➔ MOSI (Master Out Slave In)
+    Pin 21 (GP16)    ➔ MISO (Master In Slave Out)
+
+2.8-INCH TFT DISPLAY (ILI9341 SPI Controller):
+    Pin 36 (3V3 OUT) ➔ LED (Backlight Power)
+    Pin 12 (GP9)     ➔ CS (TFT Chip Select)
+    Pin 17 (GP13)    ➔ RESET
+    Pin 11 (GP8)     ➔ DC (Data/Command)
+    Pin 14 (GP10)    ➔ SCK & T_CLK (Shared Clock for TFT and Touch overlay)
+    Pin 15 (GP11)    ➔ SDI (MOSI) & T_DIN (Shared MOSI for TFT and Touch)
+    Pin 16 (GP12)    ➔ SDO (MISO) & T_DO (Shared MISO for TFT and Touch)
+    Pin 19 (GP14)    ➔ T_CS (Touch Controller Chip Select)
+    Pin 20 (GP15)    ➔ T_IRQ (Touch Interrupt Request)
+
+ANALOG JOYSTICK (Telemetry):
+    Pin 31 (GP26/ADC)➔ VRx (X-Axis / Steering)
+    Pin 32 (GP27/ADC)➔ VRy (Y-Axis / Throttle)
+    Pin 34 (GP28)    ➔ SW (Button / Transformation Toggle)
+    
+    Calibration Range Notes (Component Specific):
+        * X-Axis : Min ~2100 | Center ~33900 | Max 65535
+        * Y-Axis : Min ~2280 | Center ~34550 | Max 65535
