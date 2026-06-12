@@ -60,5 +60,15 @@ Complete pinout mapping and the power routing block diagram can be found in the 
 ## 🎥 Full Video Demonstrations
 
 For a complete look at the closed-loop system, including audio feedback and full-state machine execution:
-* **[Manual Drive & Telemetry Link Test](media/manual-mode_robo.mp4)** - Showcasing zero-latency radio control, UI updates, and differential steering.
-* **[Autonomous Evasion Protocol](media/auto-mode_robo.mp4)** - Demonstrating the ultrasonic detection, reverse, and pivot state machine.
+* **Manual Drive & Telemetry Link Test** - Showcasing zero-latency radio control, UI updates, and differential steering.
+  
+
+https://github.com/user-attachments/assets/2257e60f-c038-4692-869f-a74586b81b70
+
+
+* **Autonomous Evasion Protocol** - Demonstrating the ultrasonic detection, reverse, and pivot state machine.
+  
+
+https://github.com/user-attachments/assets/0aef2c53-4fae-4ae3-a584-ca6b1615db91
+
+
