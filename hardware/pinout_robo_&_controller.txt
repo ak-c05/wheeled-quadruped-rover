@@ -78,11 +78,9 @@ NRF24L01+ RADIO TRANSCEIVER (SPI):
     Pin 12 (GP9)     ➔ CS (TFT Chip Select)
     Pin 17 (GP13)    ➔ RESET
     Pin 11 (GP8)     ➔ DC (Data/Command)
-    Pin 14 (GP10)    ➔ SCK & T_CLK (Shared Clock for TFT and Touch overlay)
-    Pin 15 (GP11)    ➔ SDI (MOSI) & T_DIN (Shared MOSI for TFT and Touch)
-    Pin 16 (GP12)    ➔ SDO (MISO) & T_DO (Shared MISO for TFT and Touch)
-    Pin 19 (GP14)    ➔ T_CS (Touch Controller Chip Select)
-    Pin 20 (GP15)    ➔ T_IRQ (Touch Interrupt Request)
+    Pin 14 (GP10)    ➔ SCK
+    Pin 15 (GP11)    ➔ SDI (MOSI)
+    Pin 16 (GP12)    ➔ SDO (MISO)
 
 ANALOG JOYSTICK (Telemetry):
     Pin 31 (GP26/ADC)➔ VRx (X-Axis / Steering)
